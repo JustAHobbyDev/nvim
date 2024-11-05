@@ -1,7 +1,18 @@
 -- settings.lua
 --
 
+vim.cmd[[colorscheme no-clown-fiesta]]
+
+
+-- call :help instead of :Man
 vim.api.nvim_set_keymap("n", "<leader>k", ":help <C-R><C-W><CR>", { noremap = true, silent = true })
+-- Oil.nvim
+vim.api.nvim_set_keymap("n", "<leader>o", ":O<CR>", { noremap = true, silent = true })
+-- Telescope
+vim.api.nvim_set_keymap("n", "<leader>b", ":Telescope buffers<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
+-- Lazy.nvim
+vim.api.nvim_set_keymap("n", "<leader>L", ":Lazy <CR>", { noremap = true, silent = true })
 
 
 function SaveVisualSelectionToRegister(register)
