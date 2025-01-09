@@ -27,11 +27,15 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
+    -- { import = "no-clown-fiesta" },
+    -- { import = "telescope" },
+    -- { import = "oil" },
+    -- { import = "lsp" },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false, frequency = 86400 },
 })
 

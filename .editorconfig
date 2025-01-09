@@ -1,6 +1,16 @@
 # Top-most EditorConfig file
 root = true
 
+# C files
+[*.c]
+indent_style = space
+indent_size = 2
+tab_width = 2
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
 # Lua files
 [*.lua]
 indent_style = space

@@ -23,10 +23,14 @@ return {
           { name = 'nvim_lsp' },
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
+        preselect = 'item',
+        completion = {
+          completeopt = 'menu,menuone,noinsert'
+        },
         snippet = {
           expand = function(args)
             vim.snippet.expand(args.body)
@@ -83,7 +87,7 @@ return {
       })
 
       require('mason-lspconfig').setup({
-        ensure_installed = {},
+        ensure_installed = {'lua_ls', 'clangd'},
         handlers = {
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
