@@ -15,11 +15,6 @@ vim.api.nvim_set_keymap("n", "<leader>k", ":help <C-R><C-W><CR>", { noremap = tr
 vim.api.nvim_set_keymap("n", "<leader>o", ":O<CR>", { noremap = true, silent = true })
 
 -- Telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 -- Lazy.nvim
 vim.api.nvim_set_keymap("n", "<leader>L", ":Lazy <CR>", { noremap = true, silent = true })
