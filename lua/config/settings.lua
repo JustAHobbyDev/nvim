@@ -1,5 +1,12 @@
 -- settings.lua
---
+
+vim.opt.shiftwidth = 4
+vim.opt.clipboard = "unnamedplus"
+
+-- run lua
+vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<leader>x", ":.lua<CR>")
+vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
 -- call :help instead of :Man
 vim.api.nvim_set_keymap("n", "<leader>k", ":help <C-R><C-W><CR>", { noremap = true, silent = true })
@@ -27,5 +34,21 @@ vim.wo.relativenumber = true
 
 -- status bars
 -- vim.o.winbar = "%t %m %= mode:" .. vim.api.nvim_get_mode().mode .. " %= %Y "
-vim.o.laststatus = 1
+vim.o.laststatus = 3
 
+-- Highlight when yanking text
+-- Try it with `yap` in normal mode
+-- See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+-- PrettyPrintPaths
+PrettyPrintPaths = function()
+  local paths = vim.api.nvim_list_runtime_paths()
+  for path = 1, #paths do print(paths[path]) end
+end
