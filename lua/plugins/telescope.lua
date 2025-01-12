@@ -14,11 +14,20 @@ return {
     { '<leader>fg',       '<cmd>Telescope live_grep<cr>',  desc = 'Telescope live grep' },
     { '<leader>fb',       '<cmd>Telescope buffers<cr>',    desc = 'Telescope buffers' },
     { '<leader>fh',       '<cmd>Telescope help_tags<cr>',  desc = 'Telescope help tags' },
-    { '<leader>en',
+    {
+      '<leader>en',
       function()
         require('telescope.builtin').find_files { cwd = vim.fn.stdpath "config" }
       end,
       desc = 'Telescope find files in config directory'
+    },
+    {
+      '<leader>ep',
+      function()
+        require('telescope.builtin').find_files {
+          cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+        }
+      end
     },
   },
   opts = {
@@ -38,7 +47,18 @@ return {
     },
   },
   config = function(_, opts)
-    require("telescope").setup(opts)
+    require("telescope").setup(
+      {
+        pickers = {
+          find_files = {
+            theme = 'ivy',
+          }
+        }
+      })
     require('telescope').load_extension('cmdline')
+    require('telescope').load_extension('fzf')
+
+    require('config.telescope.multigrep').setup()
   end,
 }
+
