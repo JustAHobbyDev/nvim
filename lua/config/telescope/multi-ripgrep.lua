@@ -4,7 +4,7 @@
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
-local conf = require "telescope.config".values
+local conf = require("telescope.config").values
 
 return function(opts)
   opts = opts or {}
@@ -48,7 +48,7 @@ return function(opts)
 
       local rg_args = vim.iter({
         args,
-        { "--color=never", "--no-heading", "--with-filename", "--line-number", "--smart-case" }
+        { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" }
       }):flatten():totable()
       return rg_args
     end,
@@ -60,7 +60,7 @@ return function(opts)
     debounce = 100,
     prompt_title = "Live RipGrep (with shortcuts)",
     finder = custom_grep,
-    previews = conf.grep_previewer(opts),
+    previewer = conf.grep_previewer(opts),
     sorter = require("telescope.sorters").empty(),
   }):find()
 end
