@@ -8,12 +8,12 @@ return {
     'jonarrien/telescope-cmdline.nvim',
   },
   keys = {
-    { 'Q',                '<cmd>Telescope cmdline<cr>',    desc = 'Cmdline' },
-    { '<leader><leader>', '<cmd>Telescope cmdline<cr>',    desc = 'Cmdline' },
-    { '<leader>ff',       '<cmd>Telescope find_files<cr>', desc = 'Telescope find files' },
-    { '<leader>fg',       '<cmd>Telescope live_grep<cr>',  desc = 'Telescope live grep' },
-    { '<leader>fb',       '<cmd>Telescope buffers<cr>',    desc = 'Telescope buffers' },
-    { '<leader>fh',       '<cmd>Telescope help_tags<cr>',  desc = 'Telescope help tags' },
+    { 'Q',                '<cmd>Telescope cmdline<cr>',              desc = 'Cmdline' },
+    { '<leader><leader>', '<cmd>Telescope cmdline<cr>',              desc = 'Cmdline' },
+    { '<leader>ff',       '<cmd>Telescope find_files<cr>',           desc = 'Telescope find files' },
+    { '<leader>fg',       require('config.telescope.multi-ripgrep'), desc = 'Telescope live grep' },
+    { '<leader>fb',       '<cmd>Telescope buffers<cr>',              desc = 'Telescope buffers' },
+    { '<leader>fh',       '<cmd>Telescope help_tags<cr>',            desc = 'Telescope help tags' },
     {
       '<leader>en',
       function()
@@ -55,10 +55,9 @@ return {
           }
         }
       })
+
     require('telescope').load_extension('cmdline')
     require('telescope').load_extension('fzf')
-
-    require('config.telescope.multigrep').setup()
+    -- require('config.telescope.multi-ripgrep')
   end,
 }
-
