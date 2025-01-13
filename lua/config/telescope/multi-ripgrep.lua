@@ -52,7 +52,7 @@ return function(opts)
       }):flatten():totable()
       return rg_args
     end,
-    make_entry = make_entry.gen_from_vimgrep(opts),
+    entry_maker = make_entry.gen_from_vimgrep(opts),
     cwd = opts.cwd,
   }
 
