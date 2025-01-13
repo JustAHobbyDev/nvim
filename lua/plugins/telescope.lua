@@ -52,7 +52,14 @@ return {
         pickers = {
           find_files = {
             theme = 'ivy',
-          }
+          },
+          buffers = {
+            mappings = {
+              n = {
+                ["dd"] = require("telescope.actions").delete_buffer
+              },
+            },
+          },
         }
       })
 
