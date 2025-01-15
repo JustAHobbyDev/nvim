@@ -7,9 +7,9 @@ local opts = {
 }
 
 local function config()
-  local plugin = require "no-clown-fiesta"
-  plugin.setup(opts)
-  return plugin.load()
+  -- local plugin = require "no-clown-fiesta"
+  -- plugin.setup(opts)
+  -- return plugin.load()
 end
 
 return {

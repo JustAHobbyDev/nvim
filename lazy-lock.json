@@ -7,6 +7,7 @@
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "mini.icons": { "branch": "main", "commit": "1c79feb7478ca773fa3dac5cadf43ced9180e861" },
   "mini.nvim": { "branch": "main", "commit": "3d81b8ab6ad4b805c2e7b42f2e93e3dbb68dd12a" },
+  "morta.nvim": { "branch": "main", "commit": "462308c707c0bf0dc1a5e1150ac3aabb544a3820" },
   "no-clown-fiesta.nvim": { "branch": "master", "commit": "6453c0ca2f31607829457694b4208c1f612fdd61" },
   "nvim-cmp": { "branch": "main", "commit": "8c82d0bd31299dbff7f8e780f5e06d2283de9678" },
   "nvim-lspconfig": { "branch": "master", "commit": "0913481440219390969ab56a3c33089679365ef7" },
