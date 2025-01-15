@@ -31,7 +31,7 @@ vim.api.nvim_set_keymap("n", "<localleader>k", ":Man <C-R><C-W><CR>", {
 })
 
 -- Oil.nvim
-vim.api.nvim_set_keymap("n", "<leader>o", ":O<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>o", ":Oil<CR>", { noremap = true, silent = true })
 
 -- Telescope
 
