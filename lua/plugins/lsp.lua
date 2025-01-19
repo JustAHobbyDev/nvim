@@ -25,7 +25,7 @@ return {
         mapping = cmp.mapping.preset.insert({
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<Tab>'] = cmp.mapping.confirm({ select = true }),
         }),
         preselect = 'item',
         completion = {

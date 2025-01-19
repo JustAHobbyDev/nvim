@@ -14,20 +14,24 @@ vim.cmd [[
 -- run lua
 vim.keymap.set("n", "<leader><leader>x", [[:source %<CR>]])
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
-vim.keymap.set("v", "<leader>x", ":'<'>lua<CR>")
+vim.api.nvim_set_keymap("v", "<leader>x", ":lua<CR>", {
+  desc = "Send visual selection to lua interpreter",
+  noremap = true,
+  silent = true,
+})
 
 -- call :help instead of :Man
 vim.api.nvim_set_keymap("n", "<leader>k", ":help <C-R><C-W><CR>", {
-    desc = "Search vimhelp for word-under-cursor",
-    noremap = true,
-    silent = true,
+  desc = "Search vimhelp for word-under-cursor",
+  noremap = true,
+  silent = true,
 })
 
 -- Remap :Man <cword>
 vim.api.nvim_set_keymap("n", "<localleader>k", ":Man <C-R><C-W><CR>", {
-    desc = "Search manpages for word-under-cursor",
-    noremap = true,
-    silent = true ,
+  desc = "Search manpages for word-under-cursor",
+  noremap = true,
+  silent = true,
 })
 
 -- Oil.nvim
@@ -54,15 +58,33 @@ vim.o.laststatus = 3
 -- Try it with `yap` in normal mode
 -- See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- PrettyPrintPaths
-PrettyPrintPaths = function()
-    local paths = vim.api.nvim_list_runtime_paths()
-    for path = 1, #paths do print(paths[path]) end
+vim.api.nvim_create_user_command("PrettyPrintPaths", function()
+  local paths = vim.api.nvim_list_runtime_paths()
+  for path = 1, #paths do print(paths[path]) end
+end, {})
+
+-- Jump to next link in help files
+local function jump_to_next_link()
+  local line, col = unpack(vim.fn.searchpos('|[^|]*|', 'w'))
+  if line == 0 then
+    vim.notify("No more links found: line == " .. line, vim.log.levels.INFO)
+  else
+    vim.api.nvim_win_set_cursor(0, { line, col - 1 })
+  end
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "help",
+  callback = function ()
+    vim.api.nvim_buf_create_user_command(0, "NextLink", jump_to_next_link, {})
+    vim.api.nvim_buf_set_keymap(0, 'n', 'f', ":NextLink<CR>", { noremap = true, silent = true })
+  end
+})
