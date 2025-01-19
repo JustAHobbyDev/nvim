@@ -14,7 +14,7 @@ vim.cmd [[
 -- run lua
 vim.keymap.set("n", "<leader><leader>x", [[:source %<CR>]])
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
-vim.keymap.set("v", "<leader>x", ":lua<CR>")
+vim.keymap.set("v", "<leader>x", ":'<'>lua<CR>")
 
 -- call :help instead of :Man
 vim.api.nvim_set_keymap("n", "<leader>k", ":help <C-R><C-W><CR>", {
