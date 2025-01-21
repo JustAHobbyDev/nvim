@@ -6,6 +6,7 @@ return {
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'jonarrien/telescope-cmdline.nvim',
+    'tomasky/bookmarks.nvim',
   },
   keys = {
     { 'Q',                '<cmd>Telescope cmdline<cr>',              desc = 'Cmdline' },
@@ -40,31 +41,30 @@ return {
       },
     },
     extensions = {
+      bookmarks = {},
       fzf = {},
       cmdline = {
         -- cmdline plugin settings
       },
     },
+    pickers = {
+      find_files = {
+        theme = 'ivy',
+      },
+      buffers = {
+        mappings = {
+          n = {
+            ["dd"] = require("telescope.actions").delete_buffer
+          },
+        },
+      },
+    }
   },
-  config = function(_, opts)
-    require("telescope").setup(
-      {
-        pickers = {
-          find_files = {
-            theme = 'ivy',
-          },
-          buffers = {
-            mappings = {
-              n = {
-                ["dd"] = require("telescope.actions").delete_buffer
-              },
-            },
-          },
-        }
-      })
-
-    require('telescope').load_extension('cmdline')
-    require('telescope').load_extension('fzf')
-    -- require('config.telescope.multi-ripgrep')
-  end,
+  -- config = function(_, opts)
+  --   require("telescope").setup(opts)
+  --   require('telescope').load_extension('cmdline')
+  --   require('telescope').load_extension('fzf')
+  --   require('telescope').load_extension('bookmarks')
+  --   -- require('config.telescope.multi-ripgrep')
+  -- end,
 }

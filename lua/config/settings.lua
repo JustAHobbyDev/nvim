@@ -72,19 +72,57 @@ vim.api.nvim_create_user_command("PrettyPrintPaths", function()
 end, {})
 
 -- Jump to next link in help files
-local function jump_to_next_link()
-  local line, col = unpack(vim.fn.searchpos('|[^|]*|', 'w'))
+local function jump_to_link(direction)
+  local flags = direction or ""
+  local line, col = unpack(vim.fn.searchpos('|[^|]*|', flags))
   if line == 0 then
     vim.notify("No more links found: line == " .. line, vim.log.levels.INFO)
   else
     vim.api.nvim_win_set_cursor(0, { line, col - 1 })
   end
+
+  vim.notify("flags: " .. flags, vim.log.levels.INFO)
 end
 
+local function jump_to_next_link()
+  jump_to_link()
+end
+
+local function jump_to_prev_link()
+  jump_to_link("b")
+end
+
+vim.api.nvim_create_augroup("helpful", {})
+
 vim.api.nvim_create_autocmd("FileType", {
+  group = "helpful",
   pattern = "help",
-  callback = function ()
+  callback = function()
     vim.api.nvim_buf_create_user_command(0, "NextLink", jump_to_next_link, {})
     vim.api.nvim_buf_set_keymap(0, 'n', 'f', ":NextLink<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_create_user_command(0, "PrevLink", jump_to_prev_link, {})
+    vim.api.nvim_buf_set_keymap(0, 'n', 'F', ":PrevLink<CR>", { noremap = true, silent = true })
+  end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "helpful",
+  pattern = "help",
+  callback = function()
+    vim.keymap.set('n', '<CR>',
+      function()
+        local line = vim.api.nvim_get_current_line()
+        local col = vim.fn.col('.')
+        local link = line:match("|(%S+)|", col - 1)
+        if link then
+          vim.schedule(function()
+            vim.cmd("help " .. link)
+          end)
+          return ""
+        else
+          return vim.api.nvim_replace_termcodes("<CR>", true, false, true)
+        end
+      end,
+      { buffer = true, silent = true, expr = true })
   end
 })
