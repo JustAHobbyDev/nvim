@@ -1,4 +1,6 @@
 -- plugins/telescope.lua:
+local function multiripgrep() require('config.telescope.multi-ripgrep') end
+
 return {
   'nvim-telescope/telescope.nvim',
   tag = '0.1.8',
@@ -9,12 +11,12 @@ return {
     'tomasky/bookmarks.nvim',
   },
   keys = {
-    { 'Q',                '<cmd>Telescope cmdline<cr>',              desc = 'Cmdline' },
-    { '<leader><leader>', '<cmd>Telescope cmdline<cr>',              desc = 'Cmdline' },
-    { '<leader>ff',       '<cmd>Telescope find_files<cr>',           desc = 'Telescope find files' },
-    { '<leader>fg',       require('config.telescope.multi-ripgrep'), desc = 'Telescope live grep' },
-    { '<leader>fb',       '<cmd>Telescope buffers<cr>',              desc = 'Telescope buffers' },
-    { '<leader>fh',       '<cmd>Telescope help_tags<cr>',            desc = 'Telescope help tags' },
+    { 'Q',                '<cmd>Telescope cmdline<cr>',    desc = 'Cmdline' },
+    { '<leader><leader>', '<cmd>Telescope cmdline<cr>',    desc = 'Cmdline' },
+    { '<leader>ff',       '<cmd>Telescope find_files<cr>', desc = 'Telescope find files' },
+    { '<leader>fg',       multiripgrep(),                  desc = 'Telescope live grep' },
+    { '<leader>fb',       '<cmd>Telescope buffers<cr>',    desc = 'Telescope buffers' },
+    { '<leader>fh',       '<cmd>Telescope help_tags<cr>',  desc = 'Telescope help tags' },
     {
       '<leader>en',
       function()
