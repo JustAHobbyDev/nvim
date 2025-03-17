@@ -90,11 +90,38 @@ return {
       require('mason-lspconfig').setup({
         ensure_installed = { 'lua_ls', 'clangd' },
         handlers = {
-          -- this first function is the "default handler"
-          -- it applies to every language server without a "custom handler"
+          -- "default handler" for servers without a "custom handler"
           function(server_name)
             require('lspconfig')[server_name].setup({})
           end,
+
+          -- Custom handler for clangd
+          clangd = function()
+            require('lspconfig').clangd.setup({
+              cmd = {
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "--header-insertion=never",
+                "--completion-style=detailed",
+              },
+              filetypes = { "c", "cpp" },
+              root_dir = require('lspconfig.util').root_pattern("compile_commands.json", "build", ".git"),
+              init_options = {
+                clangdFileStatus = true,
+                usePlaceholders = true,
+                completeUnimported = true,
+                semanticHighlighting = true,
+              },
+              settings = {
+                clangd = {
+                  fallbackFlags = { "-I" .. "include" },   -- Add your include paths here
+                },
+              },
+            })
+          end,
+
+          -- lua handler
           lua_ls = function()
             require('lspconfig').lua_ls.setup({
               settings = {
