@@ -7,7 +7,4 @@ return {
   defaults = {
     transparent_background = true,
   },
-  config = function ()
-    vim.cmd.colorscheme 'morta'
-  end,
 }
