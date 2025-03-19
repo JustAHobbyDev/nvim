@@ -13,6 +13,7 @@
   "mini.nvim": { "branch": "main", "commit": "9d728ef916f8443996e43199fe249d11a3d2ea72" },
   "morta.nvim": { "branch": "main", "commit": "462308c707c0bf0dc1a5e1150ac3aabb544a3820" },
   "no-clown-fiesta.nvim": { "branch": "master", "commit": "2f57d1115e246b62a1a81bba806fe79aaa53b610" },
+  "nvim-autopairs": { "branch": "master", "commit": "68f0e5c3dab23261a945272032ee6700af86227a" },
   "nvim-cmp": { "branch": "main", "commit": "1e1900b0769324a9675ef85b38f99cca29e203b3" },
   "nvim-gren": { "branch": "main", "commit": "56918120c490b62f2704f5f58bcbdb35e9e38e74" },
   "nvim-lspconfig": { "branch": "master", "commit": "2574ad38c6ee4f0bef3a1ca305cd5df627a52bb3" },
